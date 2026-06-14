@@ -40,25 +40,37 @@ const useCases = [
     id: 'agricultural',
     label: 'Agricultural Land',
     image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80',
-    trap: 'The Double-Mortgage Trap',
-    description:
-      'Vision AI detects regional, handwritten cooperative bank loan stamps on older deeds that completely bypassed digital government EC registries.',
+    trap: 'The "Hidden Encumbrance" Trap',
+    problem:
+      'Vision AI detects regional, handwritten cooperative bank loan stamps and local village-level liens on historical deeds that completely bypassed digital government EC (Encumbrance Certificate) registries.',
+    legalValueAdd:
+      'We ensure compliance with the Transfer of Property Act, 1882, by flagging prior charges or mortgages that are legally binding but invisible to current digital systems.',
+    criticalEdge:
+      'We cross-verify the Vamshavruksha (Family Tree) against current revenue records to detect if the land was sold without the consent of all legal heirs, preventing future partition suits.',
   },
   {
     id: 'urban',
-    label: 'Urban Flats',
+    label: 'Urban Flats & Apartments',
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
-    trap: 'The Missing Title Link',
-    description:
-      'The chronological tracking engine maps apartment ownership linkages, instantly flagging a missing historical builder-to-buyer sale deed block.',
+    trap: 'The "Title Continuity" Check',
+    problem:
+      'The chronological tracking engine maps apartment ownership linkages, instantly flagging a missing historical "Link Document" or an unrecorded "Gift Deed" that breaks the chain of title.',
+    legalValueAdd:
+      'We validate the property status under the Real Estate (Regulation and Development) Act (RERA), 2016, ensuring that the "Sale Deed" aligns with the original "Allotment Letter" and "Possession Certificate."',
+    criticalEdge:
+      'We perform an automated Swayarjitha (Self-acquired) vs. Ancestral Property status check. If the property is ancestral, our engine flags whether a coparcener\'s consent was legally mandated under the Hindu Succession (Amendment) Act, 2005.',
   },
   {
     id: 'commercial',
     label: 'Commercial Properties',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-    trap: 'The Buried Clause',
-    description:
-      'The text parsing engine isolates an unescaped, restrictive 99-year commercial lease clause hidden deep within a 200-page historical corporate allocation packet.',
+    trap: 'The "Restrictive Covenant" Audit',
+    problem:
+      'The text parsing engine isolates an unescaped, restrictive 99-year commercial lease clause or a "Right of Pre-emption" hidden deep within a 200-page historical corporate allocation packet.',
+    legalValueAdd:
+      'We audit these findings against the Indian Registration Act, 1908, to ensure all prior instruments affecting the property were properly registered and validly executed.',
+    criticalEdge:
+      'We identify if the property is currently under "Living Status" litigation, cross-referencing high court e-court databases to detect active injunctions (Status Quo orders) that would make any current transaction legally void.',
   },
 ]
 
@@ -556,18 +568,42 @@ export default function PitchPage() {
                 </div>
               </div>
 
-              <div className="h-[120px] shrink-0 overflow-hidden border-t border-white/10 p-6 md:h-[100px] md:p-8">
+              {/* Fixed-height content panel — zero layout shift across scenarios */}
+              <div className="h-[420px] shrink-0 overflow-y-auto border-t border-white/10 p-6 md:h-[400px] md:p-8">
                 <AnimatePresence mode="wait">
-                  <motion.p
+                  <motion.div
                     key={useCases[activeCase].id}
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.3 }}
-                    className="font-body text-base leading-relaxed text-slate-300"
+                    className="space-y-5"
                   >
-                    {useCases[activeCase].description}
-                  </motion.p>
+                    <div>
+                      <p className="font-display text-xs font-bold uppercase tracking-wider text-amber-400/90">
+                        The Problem
+                      </p>
+                      <p className="mt-2 font-body text-sm leading-relaxed text-slate-300 md:text-base">
+                        {useCases[activeCase].problem}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-display text-xs font-bold uppercase tracking-wider text-emerald-400">
+                        The Legal Value-Add
+                      </p>
+                      <p className="mt-2 font-body text-sm leading-relaxed text-slate-300 md:text-base">
+                        {useCases[activeCase].legalValueAdd}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-display text-xs font-bold uppercase tracking-wider text-teal-400">
+                        The Critical Edge
+                      </p>
+                      <p className="mt-2 font-body text-sm leading-relaxed text-slate-300 md:text-base">
+                        {useCases[activeCase].criticalEdge}
+                      </p>
+                    </div>
+                  </motion.div>
                 </AnimatePresence>
               </div>
 
