@@ -3,9 +3,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  ScanText,
-  Brain,
-  Workflow,
   Users,
   Scale,
   Landmark,
@@ -18,11 +15,17 @@ import {
   Check,
   CreditCard,
   Sparkles,
-  BookOpen,
-  Timer,
+  Layers,
+  Brain,
+  Workflow,
+  Activity,
+  Globe,
+  TrendingUp,
+  Target,
+  Rocket,
+  Mic,
+  MessageSquare,
   Database,
-  ShieldOff,
-  Lock,
 } from 'lucide-react'
 
 const reveal = {
@@ -39,7 +42,7 @@ const useCases = [
     image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80',
     trap: 'The Double-Mortgage Trap',
     description:
-      'Vision AI catches physical, regional-stamped liens from cooperative banks that are missing from digital government portals. A second mortgage filed in Kannada on a revenue stamp—never digitized, never indexed—surfaces before your client wires the advance.',
+      'Vision AI detects regional, handwritten cooperative bank loan stamps on older deeds that completely bypassed digital government EC registries.',
   },
   {
     id: 'urban',
@@ -47,85 +50,152 @@ const useCases = [
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
     trap: 'The Missing Title Link',
     description:
-      'The AI builds a perfect chronological chain of title for 20-story apartments, instantly flagging missing sale deeds between past owners. One broken link in forty years of society resolutions can void an entire floor—PropertyShield finds it in 3 minutes.',
+      'The chronological tracking engine maps apartment ownership linkages, instantly flagging a missing historical builder-to-buyer sale deed block.',
   },
   {
     id: 'commercial',
-    label: 'Commercial Real Estate',
+    label: 'Commercial Properties',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
     trap: 'The Buried Clause',
     description:
-      'The deterministic engine instantly extracts hidden 99-year leases buried deep within 200-page historical deeds. Restrictions on page 187 that cap resale value forever—flagged with statutory citations, not buried in footnote fourteen.',
+      'The text parsing engine isolates an unescaped, restrictive 99-year commercial lease clause hidden deep within a 200-page historical corporate allocation packet.',
   },
 ]
 
-const securityHighlights = [
+const productionStack = [
   {
-    icon: BookOpen,
-    title: 'Statutory Anchoring',
+    icon: Layers,
+    title: 'Next.js 15',
+    role: 'Edge Frontend',
     description:
-      'The AI does not invent legal opinions. Every observation is strictly anchored to governing laws: Transfer of Property Act (1882), Registration Act (1908), and SARFAESI Act (2002).',
+      'Driving an ultra-fast, server-driven edge frontend with zero-latency route optimization.',
   },
   {
-    icon: Timer,
-    title: 'Data Ephemerality',
+    icon: Brain,
+    title: 'Google Gemini 1.5 Pro',
+    role: 'Deterministic Legal AI',
     description:
-      'We employ a strict 24-Hour Auto-Delete Lifecycle. PDFs are processed in memory and permanently wiped from our storage vaults post-analysis.',
+      'Executing deterministic, multi-document cross-referencing and extraction with a zero-hallucination guardrail configuration.',
   },
   {
     icon: Database,
-    title: 'Row-Level Security (RLS)',
+    title: 'Supabase (PostgreSQL)',
+    role: 'Secure Data Layer',
     description:
-      'Built on PostgreSQL, our database physically isolates user data. Mathematically, no user can ever query or access another user\'s documents.',
+      'Securing core transactional storage layers strictly governed by Row-Level Security (RLS) data isolation rules.',
   },
   {
-    icon: ShieldOff,
-    title: 'Zero AI Training',
+    icon: Workflow,
+    title: 'Upstash QStash',
+    role: 'Async Task Queue',
     description:
-      'We use enterprise APIs. Your highly sensitive property documents are strictly walled off and NEVER used to train public LLM models.',
+      'Managing background task routing queues to isolate heavy AI analysis from the primary HTTP thread, entirely eliminating Vercel timeout errors.',
+  },
+  {
+    icon: Activity,
+    title: 'Sentry',
+    role: 'Observability',
+    description:
+      'Providing real-time pipeline performance telemetry and enterprise error monitoring to catch visual and background exceptions instantly.',
+  },
+  {
+    icon: Globe,
+    title: 'Vercel',
+    role: 'Edge Infrastructure',
+    description:
+      'Serving globally distributed serverless hosting configurations with sub-second API endpoint deployments.',
   },
 ]
 
+const fraudSegments = [
+  { label: 'Title & Chain Defects', pct: 40, color: '#10b981' },
+  { label: 'Fabricated / Forged Deeds', pct: 35, color: '#f59e0b' },
+  { label: 'Undisclosed Liens / Mortgages', pct: 25, color: '#ef4444' },
+] as const
+
+const marketBars = [
+  {
+    label: 'TAM',
+    value: '₹20,700 Cr',
+    subtitle: 'Indian LegalTech market addressable wave by 2030',
+    heightPct: 100,
+  },
+  {
+    label: 'SAM',
+    value: '₹4,200 Cr',
+    subtitle: 'Property title verification & forensic due diligence',
+    heightPct: 42,
+  },
+  {
+    label: 'SOM',
+    value: '₹100 Cr ARR',
+    subtitle: 'Milestone target within 36–60 months',
+    heightPct: 18,
+  },
+] as const
+
 const ecosystem = [
   {
-    id: 'buyers',
     icon: Users,
     title: 'Buyers & Farmers',
-    benefit: 'Complete peace of mind. Eliminating the risk of inheriting hidden debts on life-savings investments.',
+    headline: 'Complete asset security.',
     detail:
-      'Whether purchasing a Bengaluru flat or an ancestral agricultural plot, know exactly what encumbrances exist before a single rupee changes hands. PropertyShield eliminates the silent debt trap.',
+      'Protects generational life savings by trapping hidden liabilities and toxic ownership liens prior to disbursing any financial advance.',
   },
   {
-    id: 'lawyers',
     icon: Scale,
-    title: 'Lawyers & Advocates',
-    benefit: '10× faster caseloads. Shift from manual data entry and reading 200 pages to verifying a mathematically precise 2-page summary matrix.',
+    title: 'Title Lawyers & Advocates',
+    headline: '10x capacity optimization.',
     detail:
-      'Your billable expertise moves from document drudgery to legal judgment. Review AI-extracted chains, flag edge cases, and close significantly more matters per quarter.',
+      'Compresses grueling document review cycles from 3 weeks down to a 3-minute preliminary triage matrix, expanding billable client throughput.',
   },
   {
-    id: 'banks',
     icon: Building2,
     title: 'Banks & NBFCs',
-    benefit: 'Instant risk triage. Run 1,000 automated collateral checks before approving home loans, dropping NPA risks to near zero.',
+    headline: 'Drop NPA rates to near-zero.',
     detail:
-      'Underwriters receive structured risk scores and lien maps in minutes—not weeks. Title defects caught at origination, not at recovery.',
+      'Instantly auditing property collateral safety parameters before initiating lengthy credit underwriting workflows.',
   },
   {
-    id: 'government',
-    icon: Landmark,
-    title: 'Government / Registries',
-    benefit: 'Automated auditing of document submissions prior to digital archiving, cleaning up historical land records.',
-    detail:
-      'Catch forged stamps, mismatched survey numbers, and duplicate filings at the point of submission—before they enter the permanent public record.',
-  },
-  {
-    id: 'brokers',
     icon: Handshake,
     title: 'Real Estate Brokers',
-    benefit: 'Faster closing times and higher trust with clients due to instant, transparent title clarity.',
+    headline: 'Accelerate closing velocity.',
     detail:
-      'Present verified forensic reports on day one. Deals close faster when uncertainty is removed from the negotiation table—and your reputation compounds.',
+      'Builds absolute operational trust with nervous buyers by offering objective, crystal-clear title validation on demand.',
+  },
+  {
+    icon: Landmark,
+    title: 'Government Registries',
+    headline: 'Streamline historical verification.',
+    detail:
+      'Automating incoming document consistency reviews prior to final digital ledger archival.',
+  },
+]
+
+const roadmapPhases = [
+  {
+    phase: 'Phase 1',
+    label: 'Current',
+    icon: Target,
+    title: 'Core B2C Retail',
+    description:
+      'Core B2C Retail (₹1,200 single report) and Pro Packs (₹4,000 for 5 runs) processing directly on optimized serverless architecture.',
+  },
+  {
+    phase: 'Phase 2',
+    label: 'Enterprise SaaS',
+    icon: TrendingUp,
+    title: 'Enterprise SaaS',
+    description:
+      'Exposing high-throughput API endpoints to allow direct programmatic batch testing for corporate banking and micro-lending portals.',
+  },
+  {
+    phase: 'Phase 3',
+    label: 'Cognitive Layering',
+    icon: Rocket,
+    title: 'Cognitive Layering',
+    description:
+      'Integrating the ElevenLabs API for voice-synthesized automated legal audio briefs, and Twilio/MSG91 for secure mobile telecommunication authentications.',
   },
 ]
 
@@ -136,7 +206,11 @@ const pricingTiers = [
     priceInr: '₹0',
     period: 'on sign-up',
     highlight: '1 Free Credit',
-    features: ['Email OTP secured', 'Full forensic report', 'No credit card required'],
+    features: [
+      'Email OTP secured sign-up',
+      'Full forensic title report',
+      'No credit card required',
+    ],
     cta: 'Claim Free Credit',
     featured: false,
   },
@@ -146,7 +220,11 @@ const pricingTiers = [
     priceInr: '₹1,200',
     period: 'per report',
     highlight: 'One-off forensic report',
-    features: ['Complete title analysis', 'Lien & encumbrance map', 'PDF export', '3-minute turnaround'],
+    features: [
+      'Complete title analysis',
+      'Lien & encumbrance map',
+      'PDF export · 3-minute turnaround',
+    ],
     cta: 'Buy Single Report',
     featured: false,
   },
@@ -156,9 +234,27 @@ const pricingTiers = [
     priceInr: '₹4,000',
     period: '5 reports',
     highlight: 'Best for professionals',
-    features: ['5 forensic reports', 'Priority processing', 'Bulk upload support', 'Team sharing'],
+    features: [
+      '5 forensic reports',
+      'Priority processing',
+      'Bulk upload · Team sharing',
+    ],
     cta: 'Get Pro Pack',
     featured: true,
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    priceInr: 'Bulk License',
+    period: 'annual contract',
+    highlight: 'Enterprise bulk license models',
+    features: [
+      'Unlimited API throughput',
+      'Dedicated SLA & support',
+      'Stripe transaction gateways',
+    ],
+    cta: 'Contact Sales',
+    featured: false,
   },
 ]
 
@@ -170,9 +266,141 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   )
 }
 
+function GlassStackTile({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode
+  delay?: number
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const }}
+      className="group relative overflow-hidden rounded-[16px] border border-emerald-500/20 bg-gradient-to-br from-white/[0.07] via-white/[0.03] to-emerald-950/20 p-8 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),inset_0_-1px_0_0_rgba(0,0,0,0.2),0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-[16px] transition-colors hover:border-emerald-500/35"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/[0.06] via-transparent to-slate-950/40" />
+      <div className="relative">{children}</div>
+    </motion.div>
+  )
+}
+
+function pieSlice(cx: number, cy: number, r: number, startAngle: number, endAngle: number) {
+  const start = {
+    x: cx + r * Math.cos((startAngle * Math.PI) / 180),
+    y: cy + r * Math.sin((startAngle * Math.PI) / 180),
+  }
+  const end = {
+    x: cx + r * Math.cos((endAngle * Math.PI) / 180),
+    y: cy + r * Math.sin((endAngle * Math.PI) / 180),
+  }
+  const largeArc = endAngle - startAngle > 180 ? 1 : 0
+  return `M ${cx} ${cy} L ${start.x} ${start.y} A ${r} ${r} 0 ${largeArc} 1 ${end.x} ${end.y} Z`
+}
+
+function FraudPieChart() {
+  let angle = -90
+  const slices = fraudSegments.map((seg) => {
+    const sweep = (seg.pct / 100) * 360
+    const path = pieSlice(100, 100, 80, angle, angle + sweep)
+    const slice = { ...seg, path }
+    angle += sweep
+    return slice
+  })
+
+  return (
+    <div className="overflow-hidden rounded-[16px] border border-emerald-500/15 bg-gradient-to-br from-white/[0.04] to-slate-950/60 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-[16px]">
+      <h3 className="mb-1 font-display text-lg font-bold tracking-tight text-white">
+        Anatomy of Real Estate Disputes in India
+      </h3>
+      <p className="mb-6 font-body text-sm leading-relaxed text-slate-500">
+        Verified dispute category breakdown across Indian property markets
+      </p>
+      <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+        <svg viewBox="0 0 200 200" className="h-48 w-48 shrink-0" role="img" aria-label="Real estate disputes pie chart">
+          {slices.map((slice) => (
+            <path key={slice.label} d={slice.path} fill={slice.color} stroke="rgb(2, 6, 23)" strokeWidth="2" />
+          ))}
+          <circle cx="100" cy="100" r="42" fill="rgb(2, 6, 23)" />
+          <text x="100" y="96" textAnchor="middle" className="fill-white font-display text-[11px] font-bold">
+            Dispute
+          </text>
+          <text x="100" y="110" textAnchor="middle" className="fill-slate-400 font-body text-[9px]">
+            Mix
+          </text>
+        </svg>
+        <ul className="flex-1 space-y-3">
+          {fraudSegments.map((seg) => (
+            <li key={seg.label} className="flex items-start gap-3">
+              <span className="mt-1 h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: seg.color }} />
+              <div>
+                <p className="font-display text-sm font-semibold tracking-tight text-slate-200">{seg.label}</p>
+                <p className="font-body text-sm text-emerald-400">{seg.pct}%</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+function TamSamSomChart() {
+  const maxBarH = 160
+  const chartW = 360
+  const barW = 72
+  const gap = 48
+  const baseline = 200
+
+  return (
+    <div className="overflow-hidden rounded-[16px] border border-emerald-500/15 bg-gradient-to-br from-white/[0.04] to-slate-950/60 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-[16px]">
+      <h3 className="mb-1 font-display text-lg font-bold tracking-tight text-white">
+        TAM → SAM → SOM Progression
+      </h3>
+      <p className="mb-6 font-body text-sm leading-relaxed text-slate-500">
+        Explicit milestone progression toward ₹100 Crore ARR within 36–60 months
+      </p>
+      <svg viewBox={`0 0 ${chartW} 240`} className="h-auto w-full" role="img" aria-label="TAM SAM SOM bar chart">
+        <line x1="24" y1={baseline} x2={chartW - 24} y2={baseline} stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+        {marketBars.map((bar, i) => {
+          const x = 48 + i * (barW + gap)
+          const barH = (bar.heightPct / 100) * maxBarH
+          const y = baseline - barH
+          return (
+            <g key={bar.label}>
+              <defs>
+                <linearGradient id={`barGrad${i}`} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="rgb(16, 185, 129)" stopOpacity="1" />
+                  <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.35" />
+                </linearGradient>
+              </defs>
+              <rect x={x} y={y} width={barW} height={barH} rx="6" fill={`url(#barGrad${i})`} />
+              <text x={x + barW / 2} y={y - 8} textAnchor="middle" className="fill-emerald-300 font-display text-[10px] font-bold">
+                {bar.value}
+              </text>
+              <text x={x + barW / 2} y={baseline + 18} textAnchor="middle" className="fill-white font-display text-[12px] font-bold">
+                {bar.label}
+              </text>
+            </g>
+          )
+        })}
+      </svg>
+      <div className="mt-4 grid gap-2 sm:grid-cols-3">
+        {marketBars.map((bar) => (
+          <div key={bar.label} className="rounded-lg border border-white/5 bg-white/[0.02] px-3 py-2">
+            <p className="font-display text-xs font-bold text-emerald-400">{bar.label}</p>
+            <p className="font-body text-xs leading-relaxed text-slate-500">{bar.subtitle}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function PitchPage() {
   const [activeCase, setActiveCase] = useState(0)
-  const [activeTab, setActiveTab] = useState(0)
 
   const nextCase = () => setActiveCase((i) => (i + 1) % useCases.length)
   const prevCase = () => setActiveCase((i) => (i - 1 + useCases.length) % useCases.length)
@@ -184,7 +412,7 @@ export default function PitchPage() {
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80"
-            alt="Futuristic Indian cityscape and high-end real estate"
+            alt="Expanding Indian metro cityscape and luxury real estate"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-slate-950/75" />
@@ -235,7 +463,7 @@ export default function PitchPage() {
           <motion.div {...reveal} className="mb-12 md:mb-16">
             <SectionLabel>The Nightmare</SectionLabel>
             <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              150+ pages. 3 weeks. One lien on page 42.
+              The crushing reality of Indian real estate verification
             </h2>
           </motion.div>
 
@@ -247,7 +475,7 @@ export default function PitchPage() {
             >
               <img
                 src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=1200&q=80"
-                alt="Mountain of confusing legal paperwork"
+                alt="Heavy stack of chaotic, unreadable historical documents"
                 className="aspect-[4/3] w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
@@ -259,117 +487,47 @@ export default function PitchPage() {
               className="space-y-6"
             >
               <p className="font-body text-base leading-relaxed text-slate-300 md:text-lg">
-                The average property transaction in India involves 150+ pages of unstructured,
-                multi-language documents—Kannada revenue stamps beside Telugu encumbrance certificates,
-                English sale deeds cross-referenced against Hindi affidavits. No single human can
-                fluently parse all three.
+                A standard property transaction in India forces a buyer to dig through{' '}
+                <span className="font-semibold text-white">150+ pages</span> of legacy, unstructured
+                paper trails—with heavy regional language barriers across Kannada, Telugu, and
+                English stitched together across decades of ownership transfers.
               </p>
               <p className="font-body text-base leading-relaxed text-slate-300 md:text-lg">
-                A lawyer spending three weeks reading this mountain of paper faces an unavoidable
-                enemy: human fatigue. By page 60, attention fragments. Critical details hide in
-                footnotes, annexures, and handwritten registrar margin notes.
+                Human fatigue is the silent killer. A lawyer reviewing this mountain of documents
+                for three weeks will inevitably miss a single line, a faded stamp, or a handwritten
+                margin note buried on page 42.
               </p>
-              <div className="space-y-4">
-                {[
-                  'The friction of translating between Kannada, Telugu, and English—three scripts, three legal lexicons, one transaction.',
-                  'Three weeks of waiting while folders pass between lawyers, clerks, and dusty registry shelves.',
-                  'A single missed lien on page 42—a cooperative bank mortgage never digitized—destroys a family\'s life savings and leaves them holding a hidden debt they never knew existed.',
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex gap-3 rounded-xl border border-red-500/10 bg-red-500/5 p-4 backdrop-blur-sm"
-                  >
-                    <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
-                    <p className="font-body text-sm leading-relaxed text-slate-300 md:text-base">
-                      {item}
-                    </p>
-                  </div>
-                ))}
+              <div className="rounded-xl border border-red-500/15 bg-red-500/5 p-5 backdrop-blur-sm">
+                <div className="flex gap-3">
+                  <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
+                  <p className="font-body text-sm leading-relaxed text-slate-300 md:text-base">
+                    That one missed encumbrance means a family unknowingly inherits a{' '}
+                    <span className="font-semibold text-red-300">multi-lakh active liability</span>
+                    —instantly erasing their life savings before the first EMI is ever paid.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── 3. THE ARCHITECTURE ── */}
+      {/* ── 3. REAL-WORLD USE CASES (Direct Proof) ── */}
       <section className="relative border-t border-white/5 bg-slate-950 py-20 md:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(16,185,129,0.08)_0%,_transparent_70%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
-          <motion.div {...reveal} className="mb-12 text-center md:mb-16">
-            <SectionLabel>The Architecture</SectionLabel>
-            <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              How we solve it
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl font-body text-base leading-relaxed text-slate-400">
-              Three precision-engineered layers that transform chaotic paper trails into
-              court-ready forensic intelligence—in 3 minutes, not 3 weeks.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-            {[
-              {
-                icon: ScanText,
-                title: 'Regional Vision AI',
-                subtitle: 'Multi-Script OCR',
-                description:
-                  'We don\'t just read English; we digitize and translate blurry, physical bank stamps and handwritten registrar notes in Kannada and Telugu into structured data. Faded revenue seals, cooperative society stamps, and margin annotations—decoded with sub-pixel accuracy.',
-              },
-              {
-                icon: Brain,
-                title: 'Deterministic Legal AI',
-                subtitle: 'Gemini 1.5 Pro',
-                description:
-                  'We enforce "Zero-Math Extraction." The AI acts as a mirror, not a generator—preventing hallucinations and extracting facts exactly as written. Every clause mapped to governing statutes with cited sources, never invented opinions.',
-              },
-              {
-                icon: Workflow,
-                title: 'Asynchronous Pipeline',
-                subtitle: 'QStash',
-                description:
-                  'We eliminated the "Loading Screen Timeout." Our serverless queueing architecture ensures zero downtime, allowing 10,000 concurrent users to run 3-minute deep forensic scans simultaneously without crashing the system.',
-              },
-            ].map((col, i) => (
-              <motion.div
-                key={col.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const }}
-                className="group rounded-2xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-xl transition-colors hover:border-emerald-500/30 hover:bg-white/[0.06]"
-              >
-                <div className="mb-6 inline-flex rounded-xl bg-emerald-500/10 p-3 ring-1 ring-emerald-500/20">
-                  <col.icon className="h-7 w-7 text-emerald-400" />
-                </div>
-                <p className="font-body text-xs font-semibold uppercase tracking-wider text-emerald-400">
-                  {col.subtitle}
-                </p>
-                <h3 className="mt-1 font-display text-xl font-bold tracking-tight text-white">
-                  {col.title}
-                </h3>
-                <p className="mt-4 font-body text-sm leading-relaxed text-slate-400">
-                  {col.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. REAL-WORLD USE CASES ── */}
-      <section className="relative border-t border-white/5 py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 md:px-12">
           <motion.div {...reveal} className="mb-12 md:mb-16">
             <SectionLabel>Real-World Use Cases</SectionLabel>
             <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              The proof, in the field
+              The direct proof
             </h2>
+            <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-slate-400">
+              Three failure modes PropertyShield eliminates before a single rupee changes hands.
+            </p>
           </motion.div>
 
           <motion.div {...reveal}>
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl">
-              {/* Fixed-height image container — prevents layout shift on navigation */}
-              <div className="relative h-72 w-full overflow-hidden md:h-80">
+              <div className="relative h-72 w-full shrink-0 overflow-hidden md:h-80">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={useCases[activeCase].id}
@@ -379,7 +537,7 @@ export default function PitchPage() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.35 }}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover object-center"
                   />
                 </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
@@ -398,8 +556,7 @@ export default function PitchPage() {
                 </div>
               </div>
 
-              {/* Fixed min-height content panel — prevents vertical jump */}
-              <div className="min-h-[180px] border-t border-white/10 p-6 md:min-h-[160px] md:p-8">
+              <div className="h-[120px] shrink-0 overflow-hidden border-t border-white/10 p-6 md:h-[100px] md:p-8">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={useCases[activeCase].id}
@@ -449,69 +606,108 @@ export default function PitchPage() {
         </div>
       </section>
 
-      {/* ── 5. BANK-GRADE SECURITY & STATUTORY COMPLIANCE ── */}
-      <section className="relative border-t border-white/5 bg-slate-950 py-20 md:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(16,185,129,0.06)_0%,_transparent_60%)]" />
+      {/* ── 4. MODERN SaaS PRODUCTION STACK ── */}
+      <section className="relative border-t border-white/5 py-20 md:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(16,185,129,0.08)_0%,_transparent_70%)]" />
         <div className="relative mx-auto max-w-7xl px-6 md:px-12">
           <motion.div {...reveal} className="mb-12 text-center md:mb-16">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5 backdrop-blur-md">
-              <Lock className="h-4 w-4 text-emerald-400" />
-              <span className="font-body text-xs font-semibold uppercase tracking-wider text-emerald-400">
-                Bank-Grade Security
-              </span>
-            </div>
+            <SectionLabel>The Modern SaaS Production Stack</SectionLabel>
             <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              Statutory Compliance &amp; Trust
+              How we solve it
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl font-body text-base leading-relaxed text-slate-400">
-              Property documents are among the most sensitive data a person owns. We built a
-              vault—not a cloud folder.
+            <p className="mx-auto mt-4 max-w-3xl font-body text-base leading-relaxed text-slate-400">
+              Six production-grade tools orchestrated into a zero-fail forensic pipeline—engineered
+              to scale seamlessly from first report to enterprise API throughput.
             </p>
           </motion.div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:gap-6">
-            {securityHighlights.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 p-7 backdrop-blur-xl transition-colors hover:border-emerald-500/25 md:p-8"
-              >
-                <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-emerald-500/5 blur-2xl transition-colors group-hover:bg-emerald-500/10" />
-                <div className="relative flex gap-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10">
-                    <item.icon className="h-6 w-6 text-emerald-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg font-bold tracking-tight text-white">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 font-body text-sm leading-relaxed text-slate-400">
-                      {item.description}
-                    </p>
-                  </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {productionStack.map((item, i) => (
+              <GlassStackTile key={item.title} delay={i * 0.08}>
+                <div className="mb-5 inline-flex rounded-xl bg-emerald-500/10 p-3 ring-1 ring-emerald-500/20">
+                  <item.icon className="h-7 w-7 text-emerald-400" />
                 </div>
-              </motion.div>
+                <p className="font-body text-xs font-semibold uppercase tracking-wider text-emerald-400">
+                  {item.role}
+                </p>
+                <h3 className="mt-1 font-display text-xl font-bold tracking-tight text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-4 font-body text-sm leading-relaxed text-slate-400">
+                  {item.description}
+                </p>
+              </GlassStackTile>
             ))}
           </div>
 
           <motion.div
             {...reveal}
-            className="mt-10 flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-white/5 bg-white/[0.02] px-6 py-5 backdrop-blur-sm md:mt-12"
+            className="mt-10 flex flex-wrap items-center justify-center gap-2 rounded-[16px] border border-emerald-500/10 bg-emerald-500/[0.03] px-6 py-4 backdrop-blur-[16px]"
           >
-            {['Transfer of Property Act, 1882', 'Registration Act, 1908', 'SARFAESI Act, 2002'].map(
-              (act) => (
-                <span
-                  key={act}
-                  className="flex items-center gap-2 font-body text-xs font-medium text-slate-500"
-                >
-                  <Shield className="h-3.5 w-3.5 text-emerald-500/60" />
-                  {act}
-                </span>
-              ),
-            )}
+            {productionStack.map((item, i) => (
+              <span key={item.title} className="font-display text-xs font-semibold text-emerald-400/80">
+                {item.title}
+                {i < productionStack.length - 1 && <span className="mx-2 text-slate-600">→</span>}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 5. FINANCIAL MATRIX & MARKET ECONOMICS ── */}
+      <section className="relative border-t border-white/5 bg-slate-950 py-20 md:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.05)_0%,_transparent_60%)]" />
+        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+          <motion.div {...reveal} className="mb-12 text-center md:mb-16">
+            <SectionLabel>The 100Cr Valuation Play</SectionLabel>
+            <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+              Financial matrix &amp; market economics
+            </h2>
+          </motion.div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <FraudPieChart />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <TamSamSomChart />
+            </motion.div>
+          </div>
+
+          <motion.div
+            {...reveal}
+            className="mt-8 rounded-[16px] border border-emerald-500/15 bg-gradient-to-br from-emerald-500/[0.06] via-white/[0.02] to-slate-950/60 p-8 backdrop-blur-[16px]"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 ring-1 ring-emerald-500/20">
+                <TrendingUp className="h-6 w-6 text-emerald-400" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl font-bold tracking-tight text-white">
+                  Indian LegalTech Macroeconomic Boom
+                </h3>
+                <p className="mt-4 font-body text-base leading-relaxed text-slate-300">
+                  India&apos;s LegalTech sector is growing at an aggressive{' '}
+                  <span className="font-semibold text-emerald-300">16.2% CAGR</span>, tracking a{' '}
+                  <span className="font-semibold text-emerald-300">₹20,700+ Crore</span> domestic
+                  market addressable wave by 2030. Property title verification sits at the
+                  highest-friction, highest-value intersection of real estate, banking collateral
+                  risk, and judicial backlog.
+                </p>
+                <p className="mt-4 font-body text-base leading-relaxed text-slate-400">
+                  PropertyShield is positioned to capture the SAM layer—forensic property due
+                  diligence—on a direct, numbers-backed path from ₹1,200 retail reports to{' '}
+                  <span className="font-semibold text-emerald-400">₹100 Crore ARR</span> within
+                  36–60 months through B2B API contracts with banks, NBFCs, and enterprise
+                  lending portals.
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -524,88 +720,132 @@ export default function PitchPage() {
             <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
               Who benefits
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl font-body text-base leading-relaxed text-slate-400">
-              PropertyShield creates measurable ROI across every stakeholder in the
-              real estate value chain.
-            </p>
           </motion.div>
 
-          <motion.div
-            {...reveal}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl"
-          >
-            <div className="flex flex-wrap gap-1 border-b border-white/10 p-2 md:gap-0 md:p-0">
+          <div className="relative mx-auto max-w-3xl">
+            <div
+              aria-hidden
+              className="absolute bottom-0 left-[7px] top-2 w-px bg-gradient-to-b from-emerald-500/50 via-emerald-500/20 to-transparent md:left-[9px]"
+            />
+
+            <ul className="space-y-12 md:space-y-16">
               {ecosystem.map((item, i) => (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(i)}
-                  className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-2 py-3 font-display text-[11px] font-semibold tracking-tight transition-colors sm:text-xs md:rounded-none md:px-3 md:py-4 md:text-sm ${
-                    i === activeTab
-                      ? 'bg-emerald-500/15 text-emerald-300'
-                      : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
-                  }`}
+                <motion.li
+                  key={item.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.55, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative pl-10 md:pl-12"
                 >
-                  <item.icon className="hidden h-4 w-4 sm:block" />
-                  <span className="truncate">{item.title}</span>
-                </button>
-              ))}
-            </div>
+                  <span
+                    aria-hidden
+                    className="absolute left-0 top-[0.4rem] flex h-[18px] w-[18px] items-center justify-center md:top-[0.45rem]"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                  </span>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={ecosystem[activeTab].id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.3 }}
-                className="grid items-center gap-8 p-8 md:grid-cols-[auto_1fr] md:p-12"
-              >
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-emerald-500/10 ring-1 ring-emerald-500/20">
-                  {(() => {
-                    const Icon = ecosystem[activeTab].icon
-                    return <Icon className="h-10 w-10 text-emerald-400" />
-                  })()}
-                </div>
-                <div>
-                  <h3 className="font-display text-2xl font-bold tracking-tight text-white">
-                    {ecosystem[activeTab].title}
-                  </h3>
-                  <p className="mt-2 font-display text-lg font-medium leading-snug text-emerald-300">
-                    {ecosystem[activeTab].benefit}
-                  </p>
-                  <p className="mt-4 font-body text-base leading-relaxed text-slate-400">
-                    {ecosystem[activeTab].detail}
-                  </p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <item.icon className="mt-1 h-4 w-4 shrink-0 text-emerald-500/80 md:h-5 md:w-5" />
+                    <div className="min-w-0">
+                      <h3 className="font-display text-lg font-bold tracking-tight text-white md:text-xl">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 font-body text-base leading-relaxed text-slate-400 md:text-lg md:leading-relaxed">
+                        <span className="font-semibold text-emerald-300">{item.headline}</span>{' '}
+                        {item.detail}
+                      </p>
+                    </div>
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* ── 7. ECONOMICS & MONETIZATION ── */}
+      {/* ── 7. FUTURE SCALING ROADMAP ── */}
       <section className="relative border-t border-white/5 bg-slate-950 py-20 md:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(16,185,129,0.06)_0%,_transparent_60%)]" />
+        <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+          <motion.div {...reveal} className="mb-12 text-center md:mb-16">
+            <SectionLabel>Future Scaling Roadmap</SectionLabel>
+            <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+              Strategic growth horizons
+            </h2>
+          </motion.div>
+
+          <div className="relative grid gap-6 md:grid-cols-3">
+            <div className="pointer-events-none absolute left-0 right-0 top-1/2 hidden h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent md:block" />
+
+            {roadmapPhases.map((phase, i) => (
+              <motion.div
+                key={phase.phase}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="relative flex flex-col rounded-[16px] border border-emerald-500/15 bg-gradient-to-br from-white/[0.05] to-slate-950/40 p-7 backdrop-blur-[16px] md:p-8"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="rounded-full bg-emerald-500/15 px-3 py-1 font-display text-xs font-bold tracking-tight text-emerald-300">
+                    {phase.phase}
+                  </span>
+                  <span className="font-body text-xs font-medium uppercase tracking-wider text-slate-500">
+                    {phase.label}
+                  </span>
+                </div>
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/10 ring-1 ring-emerald-500/20">
+                  <phase.icon className="h-5 w-5 text-emerald-400" />
+                </div>
+                <h4 className="font-display text-lg font-bold tracking-tight text-white">
+                  {phase.title}
+                </h4>
+                <p className="mt-3 flex-1 font-body text-sm leading-relaxed text-slate-400">
+                  {phase.description}
+                </p>
+                {phase.phase === 'Phase 3' && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    <div className="flex items-center gap-1.5 rounded-lg border border-white/5 bg-white/[0.03] px-2.5 py-1.5">
+                      <Mic className="h-3.5 w-3.5 text-emerald-400" />
+                      <span className="font-body text-[10px] text-slate-500">ElevenLabs API</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 rounded-lg border border-white/5 bg-white/[0.03] px-2.5 py-1.5">
+                      <MessageSquare className="h-3.5 w-3.5 text-emerald-400" />
+                      <span className="font-body text-[10px] text-slate-500">Twilio / MSG91</span>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. ECONOMICS & MONETIZATION ── */}
+      <section className="relative border-t border-white/5 py-20 md:py-28">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(16,185,129,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6 md:px-12">
           <motion.div {...reveal} className="mb-12 text-center md:mb-16">
-            <SectionLabel>Economics & Monetization</SectionLabel>
+            <SectionLabel>Economics &amp; Monetization</SectionLabel>
             <h2 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              Transparent pricing
+              Transparent conversion funnel
             </h2>
             <p className="mx-auto mt-4 max-w-xl font-body text-base leading-relaxed text-slate-400">
-              Start free. Scale as you close deals. Enterprise-ready payments via Stripe.
+              Free Credit sign-up via secure Email OTP, Stripe transaction gateways, and Enterprise
+              bulk license models.
             </p>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {pricingTiers.map((tier, i) => (
               <motion.div
                 key={tier.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative flex flex-col rounded-2xl border p-8 backdrop-blur-xl ${
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className={`relative flex flex-col rounded-2xl border p-7 backdrop-blur-xl md:p-8 ${
                   tier.featured
                     ? 'border-emerald-500/40 bg-emerald-500/[0.06] shadow-lg shadow-emerald-500/10'
                     : 'border-white/10 bg-white/[0.04]'
@@ -620,7 +860,7 @@ export default function PitchPage() {
                   {tier.name}
                 </h3>
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="font-display text-4xl font-bold tracking-tight text-white">
+                  <span className="font-display text-3xl font-bold tracking-tight text-white lg:text-4xl">
                     {tier.price}
                   </span>
                   <span className="font-body text-sm text-slate-400">{tier.period}</span>
@@ -629,7 +869,7 @@ export default function PitchPage() {
                 <p className="mt-3 font-display text-sm font-semibold text-slate-300">
                   {tier.highlight}
                 </p>
-                <ul className="mt-6 flex-1 space-y-3">
+                <ul className="mt-5 flex-1 space-y-2.5">
                   {tier.features.map((f) => (
                     <li key={f} className="flex items-start gap-2">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
@@ -638,7 +878,7 @@ export default function PitchPage() {
                   ))}
                 </ul>
                 <button
-                  className={`mt-8 inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-display text-sm font-semibold tracking-tight transition-colors ${
+                  className={`mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-display text-sm font-semibold tracking-tight transition-colors ${
                     tier.featured
                       ? 'bg-emerald-500 text-slate-950 hover:bg-emerald-400'
                       : 'border border-white/15 bg-white/5 text-white hover:bg-white/10'
@@ -651,17 +891,14 @@ export default function PitchPage() {
             ))}
           </div>
 
-          <motion.p
-            {...reveal}
-            className="mt-8 text-center font-body text-sm text-slate-500"
-          >
-            Enterprise-ready payments powered by{' '}
+          <motion.p {...reveal} className="mt-8 text-center font-body text-sm text-slate-500">
+            Secure payments powered by{' '}
             <span className="font-semibold text-slate-400">Stripe</span>
           </motion.p>
         </div>
       </section>
 
-      {/* ── 8. TRANSPARENCY ── */}
+      {/* ── 9. TRANSPARENCY ── */}
       <section className="relative border-t border-white/5 bg-slate-900/80 py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6 md:px-12">
           <motion.div {...reveal} className="mb-10 text-center md:mb-12">
@@ -669,9 +906,6 @@ export default function PitchPage() {
             <h2 className="font-display text-3xl font-bold tracking-tight text-slate-200 md:text-4xl">
               Drawbacks &amp; Disclaimers
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl font-body text-base leading-relaxed text-slate-500">
-              We build trust by being honest about what PropertyShield can—and cannot—do.
-            </p>
           </motion.div>
 
           <motion.div {...reveal} className="space-y-6">
@@ -680,9 +914,9 @@ export default function PitchPage() {
                 Edge-case illegibility
               </h3>
               <p className="mt-3 font-body text-sm leading-relaxed text-slate-500 md:text-base">
-                If an 80-year-old document is physically destroyed or dissolved—water-damaged,
-                torn, or reduced to fragments—Vision AI will flag it for manual human input. We
-                never guess. We surface the gap and route it to a qualified reviewer.
+                Physically degraded historical documents—water-damaged, torn, or dissolved beyond
+                machine readability—will flag a manual user prompt fallback. PropertyShield never
+                guesses; it surfaces the gap and routes it to a qualified human reviewer.
               </p>
             </div>
 
@@ -691,9 +925,8 @@ export default function PitchPage() {
                 <Shield className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500/70" />
                 <p className="font-body text-sm leading-relaxed text-slate-400 md:text-base">
                   <span className="font-semibold text-slate-300">Disclaimer: </span>
-                  PropertyShield is an AI-powered risk assessment and triage tool. It does not
-                  constitute binding legal advice. Final execution should always be verified by a
-                  registered legal practitioner.
+                  PropertyShield is an advanced risk-triage tool. Final financial execution should
+                  always be rubber-stamped by a registered legal practitioner.
                 </p>
               </div>
             </div>
